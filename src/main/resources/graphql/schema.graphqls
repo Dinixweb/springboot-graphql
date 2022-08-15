@@ -1,0 +1,26 @@
+type  Query{
+    students:[Students]
+}
+type Students{
+    id:ID
+    firstName:String!
+    lastName:String!
+    grade:String!
+    subjects:[Subjects]
+    guardian:[Guardian]
+}
+
+type Guardian {
+    firstName:String!
+    lastname:String!
+    email:String!
+
+}
+
+type Subjects {
+    maths:String!
+    english:String!
+    physics:String!
+    chemistry:String!
+    statistics:String!
+}
