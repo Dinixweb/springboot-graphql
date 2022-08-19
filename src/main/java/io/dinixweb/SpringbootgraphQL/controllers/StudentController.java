@@ -10,7 +10,7 @@ public class StudentController {
 
   private io.dinixweb.SpringbootgraphQL.repository.studentRepository studentRepository;
 
-    @QueryMapping
+    @QueryMapping(value = "Students")
     Iterable<Students> getAllStudents(){
         return studentRepository.findAll();
     }

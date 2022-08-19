@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -20,7 +19,9 @@ public class Students {
     private String lastName;
     private String grade;
 
+    @OneToMany
     private List<Subjects> subjectsList;
 
+    @OneToOne
     private Guardian guardian;
 }
