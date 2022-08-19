@@ -8,8 +8,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Students {
 
@@ -19,9 +19,17 @@ public class Students {
     private String lastName;
     private String grade;
 
+    public Students(long studentId, String firstName, String lastName, String grade) {
+        this.studentId = studentId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.grade = grade;
+    }
+
     @OneToMany
     private List<Subjects> subjectsList;
 
     @OneToOne
     private Guardian guardian;
+
 }
