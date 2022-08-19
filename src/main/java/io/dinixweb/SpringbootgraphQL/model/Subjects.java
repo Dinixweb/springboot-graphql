@@ -14,10 +14,8 @@ import javax.persistence.Id;
 public class Subjects {
 
     @Id
-    private Long studentId;
-    private String maths;
-    private String english;
-    private String physics;
-    private String chemistry;
-    private String statistics;
+    private long subjectId;
+    private String subjectName;
+    private String subjectTeacher;
+
 }
