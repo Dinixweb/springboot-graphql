@@ -18,9 +18,7 @@ type Guardian {
 }
 
 type Subjects {
-    maths:String!
-    english:String!
-    physics:String!
-    chemistry:String!
-    statistics:String!
+    subjectId:ID!
+    subjectName:String!
+    subjectTeacher:String!
 }

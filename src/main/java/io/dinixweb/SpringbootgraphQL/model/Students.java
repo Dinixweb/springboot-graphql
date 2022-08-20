@@ -27,7 +27,7 @@ public class Students {
         this.grade = grade;
     }
 
-    @OneToMany
+    @OneToMany(mappedBy = "students")
     private List<Subjects> subjectsList;
 
     @OneToOne
