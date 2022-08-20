@@ -26,9 +26,7 @@ public class StudentController {
     @QueryMapping
     Iterable<Students> students(){
         List<Students> students =  studentRepository.findAll();
-//      List<Subjects> subjectsList =  subjectRepository.findAll();
-//      students.forEach((e->e.setSubjects(subjectsList)));
-
+        students.stream().forEach(e->e.setSubjects(subjectRepository.findByStudentId(e.getStudentId())));
         return students;
     }
 }

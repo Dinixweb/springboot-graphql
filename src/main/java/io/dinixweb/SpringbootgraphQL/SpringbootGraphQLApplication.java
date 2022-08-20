@@ -30,8 +30,8 @@ public class SpringbootGraphQLApplication {
 			List<Students> students = new ArrayList<>(Arrays.asList(student1, student2, student3));
 			studentRepository.saveAll(students);
 			subjectRepository.saveAll(List.of(
-					new Subjects(2, "Physics", "Mr James", student1.getStudentId()),
-					new Subjects(3, "Chemistry", "Mrs Jessica",student2.getStudentId())));
+					new Subjects(2, "Physics", "Mr James", 1),
+					new Subjects(3, "Chemistry", "Mrs Jessica",2)));
 
 		};
 	}
