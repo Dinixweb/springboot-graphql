@@ -18,4 +18,5 @@ public class Guardian {
     private String firstName;
     private String lastName;
     private String email;
+    private long studentId;
 }

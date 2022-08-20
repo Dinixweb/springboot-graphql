@@ -1,8 +1,9 @@
 package io.dinixweb.SpringbootgraphQL;
 
+import io.dinixweb.SpringbootgraphQL.model.Guardian;
 import io.dinixweb.SpringbootgraphQL.model.Students;
 import io.dinixweb.SpringbootgraphQL.model.Subjects;
-import io.dinixweb.SpringbootgraphQL.repository.guardianRepository;
+import io.dinixweb.SpringbootgraphQL.repository.GuardianRepository;
 import io.dinixweb.SpringbootgraphQL.repository.StudentRepository;
 import io.dinixweb.SpringbootgraphQL.repository.SubjectRepository;
 import org.springframework.boot.ApplicationRunner;
@@ -22,7 +23,7 @@ public class SpringbootGraphQLApplication {
 	}
 
 	@Bean
-	ApplicationRunner applicationRunner (StudentRepository studentRepository, SubjectRepository subjectRepository, guardianRepository guardianRepository){
+	ApplicationRunner applicationRunner (StudentRepository studentRepository, SubjectRepository subjectRepository, GuardianRepository guardianRepository){
 		return args -> {
 			Students student1 = new Students(1, "James", "Mike", "Grade 12");
 			Students student2 = new Students(2, "Olu", "Hillary", "Grade 12");
@@ -32,8 +33,14 @@ public class SpringbootGraphQLApplication {
 			subjectRepository.saveAll(List.of(
 					new Subjects(2, "Physics", "Mr James", 1),
 					new Subjects(3, "Chemistry", "Mrs Jessica",2)));
+			guardianRepository.saveAll(List.of(
+					new Guardian(1,"Modupe", "Akinlola","modupe@gmail.com", 1),
+					new Guardian(2,"Moses", "Asie","moses@gmail.com", 2),
+					new Guardian(2,"Faith", "John","faith23@gmail.com", 3)
+			));
 
 		};
+
 	}
 
 }

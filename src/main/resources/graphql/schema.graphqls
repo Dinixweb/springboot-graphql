@@ -7,14 +7,15 @@ type Students{
     lastName:String!
     grade:String!
     subjects:[Subjects]
-    guardian:[Guardian]
+    guardian:Guardian
 }
 
 type Guardian {
+    guardianId:ID!
     firstName:String!
-    lastname:String!
+    lastName:String!
     email:String!
-
+    studentId:ID!
 }
 
 type Subjects {
