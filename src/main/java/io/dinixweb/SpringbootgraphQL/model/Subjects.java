@@ -19,12 +19,15 @@ public class Subjects {
     private long subjectId;
     private String subjectName;
     private String subjectTeacher;
-
-    public Subjects(int i, String maths, String mr_joe) {
+    private long studentId;
+    public Subjects(long subjectId, String subjectName, String subjectTeacher, long studentId) {
+        this.subjectId = subjectId;
+        this.subjectName = subjectName;
+        this.subjectTeacher = subjectTeacher;
+        this.studentId = studentId;
     }
 
     @ManyToOne
-    @JoinColumn(name = "students_student_id")
     Students students;
 
 }

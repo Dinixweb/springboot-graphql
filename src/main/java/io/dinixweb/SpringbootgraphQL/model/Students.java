@@ -28,7 +28,7 @@ public class Students {
     }
 
     @OneToMany(mappedBy = "students")
-    private List<Subjects> subjectsList;
+    private List<Subjects> subjects;
 
     @OneToOne
     private Guardian guardian;
