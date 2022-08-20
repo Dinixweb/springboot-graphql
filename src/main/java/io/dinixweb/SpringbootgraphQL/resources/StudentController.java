@@ -33,7 +33,7 @@ public class StudentController {
     Iterable<Students> students(){
         List<Students> students =  studentRepository.findAll();
         students.stream().forEach(e->e.setSubjects(subjectRepository.findByStudentId(e.getStudentId())));
-        students.stream().forEach(x->x.setGuardian(((guardianRepository.findByStudentId(x.getStudentId())))));
+        students.stream().forEach(x->x.setGuardian(guardianRepository.findByStudentId(x.getStudentId())));
         return students;
     }
 }
