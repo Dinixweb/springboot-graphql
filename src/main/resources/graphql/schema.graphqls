@@ -1,5 +1,7 @@
 type  Query{
     students:[Students]
+    guardian:[Guardian]
+    subjects:[Subjects]
 }
 type Students{
     studentId:ID

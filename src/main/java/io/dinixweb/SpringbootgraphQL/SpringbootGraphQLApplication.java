@@ -35,8 +35,8 @@ public class SpringbootGraphQLApplication {
 					new Subjects(3, "Chemistry", "Mrs Jessica",2)));
 			guardianRepository.saveAll(List.of(
 					new Guardian(1,"Modupe", "Akinlola","modupe@gmail.com", 1),
-					new Guardian(2,"Moses", "Asie","moses@gmail.com", 2),
-					new Guardian(2,"Faith", "John","faith23@gmail.com", 3)
+					new Guardian(2,"Moses", "Asie","moses@gmail.com", 3),
+					new Guardian(2,"Faith", "John","faith23@gmail.com", 2)
 			));
 
 		};
