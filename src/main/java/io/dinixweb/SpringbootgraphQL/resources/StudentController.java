@@ -5,10 +5,12 @@ import io.dinixweb.SpringbootgraphQL.repository.GuardianRepository;
 import io.dinixweb.SpringbootgraphQL.repository.StudentRepository;
 import io.dinixweb.SpringbootgraphQL.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class StudentController {
@@ -36,4 +38,13 @@ public class StudentController {
         students.stream().forEach(x->x.setGuardian(guardianRepository.findByStudentId(x.getStudentId())));
         return students;
     }
+
+    @QueryMapping
+    Optional<Students> studentById(@Argument Long id){
+        Optional<Students> students =  studentRepository.findById(id);
+        students.stream().forEach(e->e.setSubjects(subjectRepository.findByStudentId(e.getStudentId())));
+        students.stream().forEach(x->x.setGuardian(guardianRepository.findByStudentId(x.getStudentId())));
+        return students;
+    }
+
 }
