@@ -9,7 +9,6 @@ type Mutation {
     addStudent(student:StudentInput):Students
 }
 
-
 input StudentInput{
     studentId:ID!
     firstName:String!

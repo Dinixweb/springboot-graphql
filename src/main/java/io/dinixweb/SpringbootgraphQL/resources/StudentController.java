@@ -51,13 +51,14 @@ public class StudentController {
     }
 
     @MutationMapping
-    ResponseEntity<?> addStudent(@Argument StudentInput student){
-        Students students = studentRepository.findById(student.studentId()).orElseThrow(()->new IllegalArgumentException("student not found"));
+    Students addStudent(@Argument StudentInput student){
+        System.out.println(student);
+        //Students students = studentRepository.findById(student.studentId()).orElseThrow(()->new IllegalArgumentException("student not found"));
         Students s  = new Students(student.studentId(),student.firstName(), student.lastName(), student.grade());
-        Students saveItem = studentRepository.save(s);
-        return new ResponseEntity<>(saveItem, HttpStatus.OK);
+        return studentRepository.save(s);
+
     }
-    record StudentInput(String firstName, String lastName,long studentId, String grade ){
+    record StudentInput(long studentId,String firstName, String lastName, String grade ){
 
     }
 
