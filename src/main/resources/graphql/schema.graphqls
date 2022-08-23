@@ -4,6 +4,26 @@ type  Query{
     guardian:[Guardian]
     subjects:[Subjects]
 }
+
+type Mutation {
+    addStudent(student:StudentInput):Students
+}
+
+
+input StudentInput{
+    studentId:ID!
+    firstName:String!
+    lastName:String!
+    grade:String!
+    Guardian:[GuardianInput]!
+}
+input GuardianInput {
+    guardianId:ID!
+    firstName:String!
+    lastName:String!
+    email:String!
+    studentId:ID!
+}
 type Students{
     studentId:ID
     firstName:String!

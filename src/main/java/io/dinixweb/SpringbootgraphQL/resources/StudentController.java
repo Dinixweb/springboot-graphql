@@ -6,7 +6,10 @@ import io.dinixweb.SpringbootgraphQL.repository.StudentRepository;
 import io.dinixweb.SpringbootgraphQL.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -45,6 +48,17 @@ public class StudentController {
         students.stream().forEach(e->e.setSubjects(subjectRepository.findByStudentId(e.getStudentId())));
         students.stream().forEach(x->x.setGuardian(guardianRepository.findByStudentId(x.getStudentId())));
         return students;
+    }
+
+    @MutationMapping
+    ResponseEntity<?> addStudent(@Argument StudentInput student){
+        Students students = studentRepository.findById(student.studentId()).orElseThrow(()->new IllegalArgumentException("student not found"));
+        Students s  = new Students(student.studentId(),student.firstName(), student.lastName(), student.grade());
+        Students saveItem = studentRepository.save(s);
+        return new ResponseEntity<>(saveItem, HttpStatus.OK);
+    }
+    record StudentInput(String firstName, String lastName,long studentId, String grade ){
+
     }
 
 }
