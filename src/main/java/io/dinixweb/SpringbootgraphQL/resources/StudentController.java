@@ -1,5 +1,6 @@
 package io.dinixweb.SpringbootgraphQL.resources;
 
+import io.dinixweb.SpringbootgraphQL.model.Guardian;
 import io.dinixweb.SpringbootgraphQL.model.Students;
 import io.dinixweb.SpringbootgraphQL.repository.GuardianRepository;
 import io.dinixweb.SpringbootgraphQL.repository.StudentRepository;
@@ -51,15 +52,18 @@ public class StudentController {
     }
 
     @MutationMapping
-    Students addStudent(@Argument StudentInput student){
+    Students addStudent(@Argument StudentInput student, @Argument GuardianInput guardian){
         System.out.println(student);
         //Students students = studentRepository.findById(student.studentId()).orElseThrow(()->new IllegalArgumentException("student not found"));
         Students s  = new Students(student.studentId(),student.firstName(), student.lastName(), student.grade());
+        Guardian guardian1 = new Guardian(guardian.guardianId(), guardian.firstName(), guardian.lastName(), guardian.email(), guardian.studentId());
+        guardianRepository.save(guardian1);
         return studentRepository.save(s);
 
     }
     record StudentInput(long studentId,String firstName, String lastName, String grade ){
-
+    }
+    record GuardianInput(long guardianId, String firstName, String lastName, String email, long studentId  ){
     }
 
 }

@@ -6,7 +6,7 @@ type  Query{
 }
 
 type Mutation {
-    addStudent(student:StudentInput):Students
+    addStudent(student:StudentInput!,guardian:GuardianInput!):Students!
 }
 
 input StudentInput{
@@ -14,7 +14,6 @@ input StudentInput{
     firstName:String!
     lastName:String!
     grade:String!
-    Guardian:[GuardianInput]!
 }
 input GuardianInput {
     guardianId:ID!
