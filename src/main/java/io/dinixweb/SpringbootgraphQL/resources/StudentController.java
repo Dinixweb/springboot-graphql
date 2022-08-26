@@ -5,13 +5,11 @@ import io.dinixweb.SpringbootgraphQL.model.Students;
 import io.dinixweb.SpringbootgraphQL.repository.GuardianRepository;
 import io.dinixweb.SpringbootgraphQL.repository.StudentRepository;
 import io.dinixweb.SpringbootgraphQL.repository.SubjectRepository;
-import io.dinixweb.SpringbootgraphQL.response.DeleteResponse;
+import io.dinixweb.SpringbootgraphQL.response.GlobalResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -66,13 +64,13 @@ public class StudentController {
     }
 
     @MutationMapping
-    DeleteResponse deleteStudent (@Argument long studentId){
+    GlobalResponse deleteStudent (@Argument long studentId){
         Optional<Students> students =  studentRepository.findById(studentId);
        if(students.isEmpty()){
-           return new DeleteResponse(false, "no user found", studentId);
+           return new GlobalResponse(false, "no user found", studentId);
        }
           studentRepository.deleteById(studentId);
-        return new DeleteResponse(true, "no error", studentId);
+        return new GlobalResponse(true, "no errors", studentId);
     }
 
 }
