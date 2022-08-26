@@ -13,7 +13,7 @@ type Mutation {
 type DeleteMessage{
     success:Boolean
     error:String
-    message:String
+    studentId:String
 
 }
 

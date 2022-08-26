@@ -66,8 +66,13 @@ public class StudentController {
     }
 
     @MutationMapping
-    DeleteResponse<ResponseEntity<?>> deleteStudent (@Argument long studentId){
-        studentRepository.deleteById(studentId);
+    DeleteResponse deleteStudent (@Argument long studentId){
+        Optional<Students> students =  studentRepository.findById(studentId);
+       if(students.isEmpty()){
+           return new DeleteResponse(false, "no user found", studentId);
+       }
+          studentRepository.deleteById(studentId);
+        return new DeleteResponse(true, "no error", studentId);
     }
 
 }
