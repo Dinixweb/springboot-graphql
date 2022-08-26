@@ -5,6 +5,7 @@ import io.dinixweb.SpringbootgraphQL.model.Students;
 import io.dinixweb.SpringbootgraphQL.repository.GuardianRepository;
 import io.dinixweb.SpringbootgraphQL.repository.StudentRepository;
 import io.dinixweb.SpringbootgraphQL.repository.SubjectRepository;
+import io.dinixweb.SpringbootgraphQL.response.DeleteResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -62,6 +63,11 @@ public class StudentController {
     record StudentInput(long studentId,String firstName, String lastName, String grade ){
     }
     record GuardianInput(long guardianId, String firstName, String lastName, String email, long studentId  ){
+    }
+
+    @MutationMapping
+    DeleteResponse<ResponseEntity<?>> deleteStudent (@Argument long studentId){
+        studentRepository.deleteById(studentId);
     }
 
 }

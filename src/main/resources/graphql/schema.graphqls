@@ -8,7 +8,13 @@ type  Query{
 type Mutation {
     addStudent(student:StudentInput!,guardian:GuardianInput!):Students!
     updateStudent(student:StudentInput!):Students
-    deleteStudent(studentId:ID!):ID!
+    deleteStudent(studentId:ID!):DeleteMessage
+}
+type DeleteMessage{
+    success:Boolean
+    error:String
+    message:String
+
 }
 
 input StudentInput{
