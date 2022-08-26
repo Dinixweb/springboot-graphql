@@ -53,8 +53,6 @@ public class StudentController {
 
     @MutationMapping
     Students addStudent(@Argument StudentInput student, @Argument GuardianInput guardian){
-        System.out.println(student);
-        //Students students = studentRepository.findById(student.studentId()).orElseThrow(()->new IllegalArgumentException("student not found"));
         Students s  = new Students(student.studentId(),student.firstName(), student.lastName(), student.grade());
         Guardian guardian1 = new Guardian(guardian.guardianId(), guardian.firstName(), guardian.lastName(), guardian.email(), guardian.studentId());
         guardianRepository.save(guardian1);
