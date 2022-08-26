@@ -7,6 +7,8 @@ type  Query{
 
 type Mutation {
     addStudent(student:StudentInput!,guardian:GuardianInput!):Students!
+    updateStudent(student:StudentInput!):Students
+    deleteStudent(studentId:ID!):ID!
 }
 
 input StudentInput{
