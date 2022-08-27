@@ -68,17 +68,15 @@ public class StudentController {
         System.out.println(student);
         Optional<Students> students =  studentRepository.findById(studentId);
         if(students.isEmpty()){
-           return new UpdateResponse(false, studentId, "update was unsuccessful");
+           return new UpdateResponse(false, studentId, "update was not successful");
         }else {
             Students students1 = students.stream().filter(obj->Objects.equals(studentId, obj.getStudentId())).findAny().orElse(null);
-
             students1.setFirstName(student.firstName());
             students1.setLastName(student.lastName());
             students1.setGrade(student.grade());
             studentRepository.save(students1);
-
         }
-        return new UpdateResponse(true, studentId, "student with studentId:" +studentId +"successfully updated");
+        return new UpdateResponse(true, studentId, "student successfully updated" );
 
     }
     @MutationMapping
