@@ -6,6 +6,7 @@ import io.dinixweb.SpringbootgraphQL.repository.GuardianRepository;
 import io.dinixweb.SpringbootgraphQL.repository.StudentRepository;
 import io.dinixweb.SpringbootgraphQL.repository.SubjectRepository;
 import io.dinixweb.SpringbootgraphQL.response.GlobalResponse;
+import io.dinixweb.SpringbootgraphQL.response.UpdateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -63,20 +64,22 @@ public class StudentController {
 
 
     @MutationMapping
-    void updateStudent(@Argument long studentId, @Argument StudentInput student) throws Exception {
+    UpdateResponse updateStudent(@Argument long studentId, @Argument StudentInput student) {
         System.out.println(student);
         Optional<Students> students =  studentRepository.findById(studentId);
-//        if(students.isEmpty()){
-//            throw new Exception("unable to update");
-//        }else {
-//
-//        }
-        System.out.println(students);
+        if(students.isEmpty()){
+           return new UpdateResponse(false, studentId, "update was unsuccessful");
+        }else {
+            Students students1 = students.stream().filter(obj->Objects.equals(studentId, obj.getStudentId())).findAny().orElse(null);
 
-//        students..setFirstName(student.firstName());
-//        students.setLastName(student.lastName());
-//        students.setGrade(student.grade());
-       // studentRepository.save(students);
+            students1.setFirstName(student.firstName());
+            students1.setLastName(student.lastName());
+            students1.setGrade(student.grade());
+            studentRepository.save(students1);
+
+        }
+        return new UpdateResponse(true, studentId, "student with studentId:" +studentId +"successfully updated");
+
     }
     @MutationMapping
     Students addNewStudent (@Argument newStudentInput newStudentInput){

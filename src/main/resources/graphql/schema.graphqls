@@ -17,9 +17,6 @@ type DeleteMessage{
 }
 type UpdateMessage{
     studentId:ID
-    firstName:String
-    lastName:String
-    grade:String
     success:Boolean
     error:String
 }

@@ -13,15 +13,3 @@ public class GlobalResponse {
     private long studentId;
 }
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class UpdateResponse{
-    private boolean success;
-    private String firstName;
-    private String lastName;
-    private String studentId;
-    private String grade;
-    private String error;
-}
-
