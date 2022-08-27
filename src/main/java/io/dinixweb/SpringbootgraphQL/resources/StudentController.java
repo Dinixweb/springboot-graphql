@@ -36,7 +36,10 @@ public class StudentController {
         this.guardianRepository = guardianRepository;
     }
 
-
+    /**
+     * This method will return list of all students alongside their subjects and guarantors in db
+     * @return StudentList
+     */
     @QueryMapping
     Iterable<Students> students(){
         List<Students> students =  studentRepository.findAll();
@@ -45,6 +48,11 @@ public class StudentController {
         return students;
     }
 
+    /**
+     * This method will return a single student with their details
+     * @param id
+     * @return
+     */
     @QueryMapping
     Optional<Students> studentById(@Argument Long id){
         Optional<Students> students =  studentRepository.findById(id);
@@ -53,6 +61,12 @@ public class StudentController {
         return students;
     }
 
+    /**
+     * This is a mutation method. for adding new students and their guarantors
+     * @param student
+     * @param guardian
+     * @return
+     */
     @MutationMapping
     Students addStudent(@Argument StudentInput student, @Argument GuardianInput guardian){
         Students s  = new Students(student.studentId(),student.firstName(), student.lastName(), student.grade());
@@ -63,6 +77,12 @@ public class StudentController {
     }
 
 
+    /**
+     * Update method. this method will update a single student if they exist in the database
+     * @param studentId
+     * @param student
+     * @return
+     */
     @MutationMapping
     UpdateResponse updateStudent(@Argument long studentId, @Argument StudentInput student) {
         System.out.println(student);
@@ -79,13 +99,12 @@ public class StudentController {
         return new UpdateResponse(true, studentId, "student successfully updated" );
 
     }
-    @MutationMapping
-    Students addNewStudent (@Argument newStudentInput newStudentInput){
-        System.out.println(newStudentInput);
-        return new Students();
-    }
 
-
+    /**
+     * This method will delete a student in the database if they exist
+     * @param studentId
+     * @return
+     */
     @MutationMapping
     GlobalResponse deleteStudent (@Argument long studentId){
         Optional<Students> students =  studentRepository.findById(studentId);
@@ -104,8 +123,7 @@ public class StudentController {
     record UpdateStudentInput(String firstName, String lastName, String grade ){
     }
 
-    record newStudentInput(String firstName, String lastName, String grade, long studentId ){
-    }
+
 
     record GuardianInput(long guardianId, String firstName, String lastName, String email, long studentId  ){
     }
