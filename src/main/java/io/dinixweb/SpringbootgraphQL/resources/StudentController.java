@@ -84,7 +84,6 @@ public class StudentController {
      */
     @MutationMapping
     UpdateResponse updateStudent(@Argument long studentId, @Argument StudentInput student) {
-        System.out.println(student);
         Optional<Students> students =  studentRepository.findById(studentId);
         if(students.isEmpty()){
            return new UpdateResponse(false, studentId, "update was not successful");
@@ -108,22 +107,18 @@ public class StudentController {
     GlobalResponse deleteStudent (@Argument long studentId){
         Optional<Students> students =  studentRepository.findById(studentId);
        if(students.isEmpty()){
-           return new GlobalResponse(false, "no user found", studentId);
+           return new GlobalResponse(false, "record not found", studentId,"was unable to delete student");
        }
           studentRepository.deleteById(studentId);
-        return new GlobalResponse(true, "no errors", studentId);
+        return new GlobalResponse(true, "", studentId, "student record deleted successfully");
     }
 
 
     //Record Input
     record StudentInput(long studentId,String firstName, String lastName, String grade ){
     }
-
     record UpdateStudentInput(String firstName, String lastName, String grade ){
     }
-
-
-
     record GuardianInput(long guardianId, String firstName, String lastName, String email, long studentId  ){
     }
 

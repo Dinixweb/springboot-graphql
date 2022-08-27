@@ -11,5 +11,6 @@ public class GlobalResponse {
     private boolean success;
     private String error;
     private long studentId;
+    private String message;
 }
 

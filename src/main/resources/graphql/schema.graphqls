@@ -14,6 +14,7 @@ type DeleteMessage{
     success:Boolean
     error:String
     studentId:String
+    message:String
 }
 type UpdateMessage{
     studentId:ID
@@ -22,9 +23,9 @@ type UpdateMessage{
 }
 
 input UpdateStudentInput{
-    firstName:String!
-    lastName:String!
-    grade:String!
+    firstName:String
+    lastName:String
+    grade:String
 }
 
 input StudentInput{
