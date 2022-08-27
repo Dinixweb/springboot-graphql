@@ -13,7 +13,9 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class StudentController {
@@ -58,10 +60,30 @@ public class StudentController {
         return studentRepository.save(s);
 
     }
-    record StudentInput(long studentId,String firstName, String lastName, String grade ){
+
+
+    @MutationMapping
+    void updateStudent(@Argument long studentId, @Argument StudentInput student) throws Exception {
+        System.out.println(student);
+        Optional<Students> students =  studentRepository.findById(studentId);
+//        if(students.isEmpty()){
+//            throw new Exception("unable to update");
+//        }else {
+//
+//        }
+        System.out.println(students);
+
+//        students..setFirstName(student.firstName());
+//        students.setLastName(student.lastName());
+//        students.setGrade(student.grade());
+       // studentRepository.save(students);
     }
-    record GuardianInput(long guardianId, String firstName, String lastName, String email, long studentId  ){
+    @MutationMapping
+    Students addNewStudent (@Argument newStudentInput newStudentInput){
+        System.out.println(newStudentInput);
+        return new Students();
     }
+
 
     @MutationMapping
     GlobalResponse deleteStudent (@Argument long studentId){
@@ -71,6 +93,20 @@ public class StudentController {
        }
           studentRepository.deleteById(studentId);
         return new GlobalResponse(true, "no errors", studentId);
+    }
+
+
+    //Record Input
+    record StudentInput(long studentId,String firstName, String lastName, String grade ){
+    }
+
+    record UpdateStudentInput(String firstName, String lastName, String grade ){
+    }
+
+    record newStudentInput(String firstName, String lastName, String grade, long studentId ){
+    }
+
+    record GuardianInput(long guardianId, String firstName, String lastName, String email, long studentId  ){
     }
 
 }
